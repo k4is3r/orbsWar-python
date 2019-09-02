@@ -1,9 +1,10 @@
 import contextlib
-with contextlib.redirect_stdout(None): 
+with contextlib.redirect_stdout(None):
     import pygame
 
 import random
 import os
+
 
 pygame.font.init()
 
@@ -95,7 +96,7 @@ if __name__ == '__main__':
     #setup pygame window
     WIN = pygame.display.set_mode((W,H))
     pygame.display.set_caption('Blobs')
-    print('Iniciando game')
+    print('Starting game')
 
     pygame.display.flip()
 
