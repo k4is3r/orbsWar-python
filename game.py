@@ -23,3 +23,25 @@ COLORS = [(255,0,0), (255, 128, 0), (255,255,0), (128,255,0),(0,255,0),(0,255,12
 #variables dinamicas 
 players = {}
 balls = []
+
+#FUNCTIONS
+def convert_time(t):
+    """
+        converts a time given in seconds to a time in 
+        minutes 
+        param t:int
+        return: string
+    """
+    if type(t) == str:
+        return t
+    
+    if int(t) <60:
+        return str(t) + "s"
+    else:
+        minutes = str(t // 60)
+        seconds = str(t % 60)
+
+        if int(seconds) < 10:
+            seconds = "0" + seconds
+        return minutes + ":" + seconds
+    
