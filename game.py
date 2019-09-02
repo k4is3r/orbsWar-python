@@ -34,7 +34,7 @@ def convert_time(t):
     """
     if type(t) == str:
         return t
-    
+
     if int(t) <60:
         return str(t) + "s"
     else:
@@ -44,4 +44,26 @@ def convert_time(t):
         if int(seconds) < 10:
             seconds = "0" + seconds
         return minutes + ":" + seconds
-    
+
+
+def redraw_window(players, balls, game_time, score):
+    """
+        draws each frame
+        return: None
+    """
+    pass
+
+
+if __name__ == '__main__':
+    #make window start in top left hand corner
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0,30)
+
+    #setup pygame window
+    WIN = pygame.display.set_mode((W,H))
+    pygame.display.set_caption('Blobs')
+    print('Iniciando game')
+
+    pygame.display.flip()
+
+    while True:
+        pass
