@@ -88,3 +88,25 @@ def check_collision(players, balls):
                 p["score"] = p["score"] + 0.5
                 balls.remove(ball)
 
+def player_collision(players):
+    """
+    check for player collision and handles that collision
+    players: dict
+    return: None
+    """
+    sort_players = sorted(players, key=lambda x: players[x]["score"])
+    for x, player1 in enumerate(sort_players):
+        for player2 in sort_players[x+1:]:
+            p1x = players[player1]["x"]
+            p1y = players[player2]["y"]
+
+            p2x = players[player2]["x"]
+            p2y = players[player2]["y"]
+
+            dis = math.sqrt((p1x - p2x)**2 + (p1y-p2y)**2)
+            if dis < players[player2]["score"] - players[player1]["score"]*0.85:
+                players[player2]["score"] = players[player2]["score"] + players[player1]["score"]
+                players[player1]["score"] = 0
+                players[player1]["x"], players[player1]["y"] = get_start_location(players)
+                print(f"[GAME] "+ players[player2]["name"] + " ATE " + players[player1]["name"])
+
