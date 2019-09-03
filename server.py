@@ -110,3 +110,24 @@ def player_collision(players):
                 players[player1]["x"], players[player1]["y"] = get_start_location(players)
                 print(f"[GAME] "+ players[player2]["name"] + " ATE " + players[player1]["name"])
 
+def create_balls(balls, n):
+    """
+    create orbs/balls on the screen
+    balls: a list to add balls/orbs to
+    n: the amount of balls to make
+    return: None
+    """
+    for in range(n):
+        while True:
+            stop = True
+            x = random.randrange(0,W)
+            y = random.randrange(0,H)
+            for player in players:
+                p = players[player]
+                dis = math.sqrt((x - p["x"])**2 + (y-p["y"])**2)
+                if dis <= START_RADIUS + p["score"]:
+                    stop = False
+            if stop:
+                break
+
+        balls.append((x, y, random.choice(colors)))
