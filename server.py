@@ -87,3 +87,4 @@ def check_collision(players, balls):
             if dis <= START_RADIUS + p["score"]:
                 p["score"] = p["score"] + 0.5
                 balls.remove(ball)
+
