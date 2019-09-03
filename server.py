@@ -55,4 +55,15 @@ stat_time = 0
 game_time = "Starting Soon"
 nxt = 1
 
+#Functions
+def release_mass(players):
+    """
+    releases the mass of players
+    players: dict
+    return: None
+    """
+    for player in players:
+        p = players[player]
+        if p["score"] > 8:
+            p["score"] = math.floor(p["score"] * 0.95)
 
