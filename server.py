@@ -67,3 +67,23 @@ def release_mass(players):
         if p["score"] > 8:
             p["score"] = math.floor(p["score"] * 0.95)
 
+def check_collision(players, balls):
+    """
+    checks if any of the player have collied with any of the balls
+    players: a dictonary of players
+    ball: a list of balls
+    return: None
+    """
+    to_delete =  []
+    for player in players:
+        p = players[player]
+        x = p["x"]
+        y = p["y"]
+        for ball in balls:
+            bx = ball[0]
+            by = ball[1]
+
+            dis = math.sqrt((x - bx)**2 + (y-by)**2)
+            if dis <= START_RADIUS + p["score"]:
+                p["score"] = p["score"] + 0.5
+                balls.remove(ball)
