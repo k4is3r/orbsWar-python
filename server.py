@@ -131,3 +131,4 @@ def create_balls(balls, n):
                 break
 
         balls.append((x, y, random.choice(colors)))
+
