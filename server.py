@@ -133,4 +133,22 @@ def create_balls(balls, n):
         balls.append((x, y, random.choice(colors)))
 
 def get_start_location(players):
-    pass
+    """
+    picks a start locatio for a player based on other player
+    location. It Will ensure it does not spwan inside another player
+    players: dict
+    return: tuple(x,y)
+    """
+    while True:
+        stop = True
+        x = random.randrange(0,W)
+        y = random.randrange(0,H)
+        for player in players:
+            p = players[player]
+            dis = math.sqrt((x - p["x"])**2 + (y - p["y"])**2)
+            if dis <= START_RADIUS + p["score"]:
+                stop = False
+                break
+        if stop:
+            break
+    return (x,y)
