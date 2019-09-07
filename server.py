@@ -152,3 +152,6 @@ def get_start_location(players):
         if stop:
             break
     return (x,y)
+
+def threaded_client(conn, _id):
+    pass
