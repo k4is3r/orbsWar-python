@@ -132,3 +132,56 @@ def create_balls(balls, n):
 
         balls.append((x, y, random.choice(colors)))
 
+def get_start_location(players):
+    """
+    picks a start locatio for a player based on other player
+    location. It Will ensure it does not spwan inside another player
+    players: dict
+    return: tuple(x,y)
+    """
+    while True:
+        stop = True
+        x = random.randrange(0,W)
+        y = random.randrange(0,H)
+        for player in players:
+            p = players[player]
+            dis = math.sqrt((x - p["x"])**2 + (y - p["y"])**2)
+            if dis <= START_RADIUS + p["score"]:
+                stop = False
+                break
+        if stop:
+            break
+    return (x,y)
+
+def threaded_client(conn, _id):
+    """
+    runs in a new thread for each player connected to the server
+    con: ip address of connection
+    _id: int
+    return: None
+    """
+    global connections, players, balls, game_time, nxt, start
+
+    current_id = _id
+
+    #recieve a name from the client
+    data = conn.recv(16)
+    name =data.decode("utf-8")
+    print("[LOG]", name, " connected to the serve")
+    #setup properties for each new player
+    color = colors[current_id]
+    x, y = get_start_location(players)
+    players[current_id] = {"x":x, "y":y, "color":color, "score":0, "name":name}
+
+    #pickle data and send initial info to clients
+    conn.send(str.encode(str(current_id)))
+
+    #server will recieve basic commands from client
+    #it will send back all of the other clientes info
+    '''
+    commands start with:
+    move 
+    jump
+    get
+    id - returns id of client
+    '''
