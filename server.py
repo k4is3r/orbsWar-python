@@ -132,3 +132,5 @@ def create_balls(balls, n):
 
         balls.append((x, y, random.choice(colors)))
 
+def get_start_location(players):
+    pass
