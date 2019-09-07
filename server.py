@@ -154,4 +154,34 @@ def get_start_location(players):
     return (x,y)
 
 def threaded_client(conn, _id):
-    pass
+    """
+    runs in a new thread for each player connected to the server
+    con: ip address of connection
+    _id: int
+    return: None
+    """
+    global connections, players, balls, game_time, nxt, start
+
+    current_id = _id
+
+    #recieve a name from the client
+    data = conn.recv(16)
+    name =data.decode("utf-8")
+    print("[LOG]", name, " connected to the serve")
+    #setup properties for each new player
+    color = colors[current_id]
+    x, y = get_start_location(players)
+    players[current_id] = {"x":x, "y":y, "color":color, "score":0, "name":name}
+
+    #pickle data and send initial info to clients
+    conn.send(str.encode(str(current_id)))
+
+    #server will recieve basic commands from client
+    #it will send back all of the other clientes info
+    '''
+    commands start with:
+    move 
+    jump
+    get
+    id - returns id of client
+    '''
