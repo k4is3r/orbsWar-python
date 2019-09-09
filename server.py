@@ -185,3 +185,19 @@ def threaded_client(conn, _id):
     get
     id - returns id of client
     '''
+    while True:
+
+        if start:
+            game_time = round(time.time() - start_time)
+            #if the game time passes the round time the game will stop
+            if game_time >= ROUND_TIME:
+                start = False
+            else:
+                if game_time // MASS_LOSS_TIME == nxt:
+                    nxt += 1
+                    release_mass(players)
+                    print(f"[GAME] {name}'s Mass depleting")
+        try:
+            #Recieve data from client
+            data = conn.recv(32)
+            
