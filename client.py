@@ -25,3 +25,10 @@ class Network:
         self.client.send(str.encode(name))
         val = self.client.recv(8)
         return int(val.decode())
+
+    def disconnect(self):
+        """
+        disconnects from the server
+        return: None
+        """
+        self.client.close()
