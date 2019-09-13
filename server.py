@@ -261,3 +261,18 @@ print("[GAME] Setting up level")
 print("[SERVER] Waiting for connections")
 
 #keep looping to accept new connections
+while Trur:
+    host, addr = S.accept()
+    print("[CONNECTION] Connected to:", addr)
+
+    #start game when a client on the server computer connects
+    if addr[0] == SERVER_IP and not(start):
+        start = True
+        start_time = time.time()
+        print("[STARTED] GAME Started")
+    #increment connections start new thread then increment ids
+    connections += 1
+    start_new_thread(threaded_client,(host,_id))
+
+#when program ends
+print("[SERVER] Server offline")
