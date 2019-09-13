@@ -25,3 +25,32 @@ class Network:
         self.client.send(str.encode(name))
         val = self.client.recv(8)
         return int(val.decode())
+
+    def disconnect(self):
+        """ 
+        disconnects from the server
+        return: None
+        """
+        self.client.close()
+    
+    def send(self, data, pick=False):
+        """ 
+        sends information to the server
+        data: str
+        pick: boolean if should pickle or not
+        return : str
+        """
+        try:
+            if pick:
+                self.client.send(pickle.dumps(data))
+            else:
+                self.client.send(str.encode(data))
+            reply = self.client.recv(2048*4)
+            try:
+                reply = pickle.loads(reply)
+            except Exception as e:
+                print(e)
+
+            return reply
+        except socket.error as e:
+            print(e)
