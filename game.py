@@ -2,6 +2,7 @@ import contextlib
 with contextlib.redirect_stdout(None):
     import pygame
 
+from client import Network
 import random
 import os
 
@@ -87,6 +88,24 @@ def redraw_window(players, balls, game_time, score):
     WIN.blit(text, (10,15 + text.getheight()))
 
 
+def main(name):
+    """
+    function for running the game,
+    includes the main loop of the game
+    players: a list of dicts representing a player
+    return: None
+    """
+    global players
+
+    #start by connection to the network
+    server = Network()
+    current_id = server.connect(name)
+    #modifiying to recive to variables separate
+    balls, players, game_time = server.send("get")
+    #setup the clock, limit to 30 fps
+    clock = pygame.time.Clock()
+
+    run = True
 
 
 if __name__ == '__main__':

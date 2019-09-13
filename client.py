@@ -2,6 +2,7 @@ import socket
 import _pickle as pickle
 
 class Network:
+<<<<<<< HEAD
     """ 
     class to connect, send and recieve information from the server
     need to hardcode the host attribute to be server's ip
@@ -12,11 +13,27 @@ class Network:
         #self.client.settimeout(10.0)
         #this ip is going to hardcode to connect
         self.host = "192.168.1.12"
+=======
+    """
+    class to connect, send and recive information from server
+    need to hardcode the host attribute to be the server's ip
+    """
+
+    def __init__(self):
+        self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        #the host ip addrees
+        self.host = "192.168.1.12"
+        #the connection port 
+>>>>>>> 800537caf611417d6fddfe2e7a7735446b7287d0
         self.port = 5555
         self.addr = (self.host, self.port)
 
     def connect(self, name):
+<<<<<<< HEAD
         """ 
+=======
+        """
+>>>>>>> 800537caf611417d6fddfe2e7a7735446b7287d0
         connects to server and returns the id of the client that connected
         name: str
         return: int representing id
@@ -27,11 +44,16 @@ class Network:
         return int(val.decode())
 
     def disconnect(self):
+<<<<<<< HEAD
         """ 
+=======
+        """
+>>>>>>> 800537caf611417d6fddfe2e7a7735446b7287d0
         disconnects from the server
         return: None
         """
         self.client.close()
+<<<<<<< HEAD
     
     def send(self, data, pick=False):
         """ 
@@ -39,6 +61,15 @@ class Network:
         data: str
         pick: boolean if should pickle or not
         return : str
+=======
+
+    def send(self, data, pick=False):
+        """
+        sends information to the server
+        data: str
+        pick: boolean if should pickle or not
+        return: str
+>>>>>>> 800537caf611417d6fddfe2e7a7735446b7287d0
         """
         try:
             if pick:
