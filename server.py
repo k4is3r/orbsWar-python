@@ -252,3 +252,12 @@ def threaded_client(conn, _id):
     conn.close()
 
 
+# MAINLOOP
+
+#Setup level with balls
+create_balls(balls, random.randrange(200,250))
+
+print("[GAME] Setting up level")
+print("[SERVER] Waiting for connections")
+
+#keep looping to accept new connections
