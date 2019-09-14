@@ -122,8 +122,20 @@ def main(name):
         if keys[pygame.K_LEFT] or keys[pygame.K_a]:
             if player["x"] - vel - PLAYER_RADIUS - player["score"] >= 0:
                 player["x"] = player["x"] + vel
-        
 
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+            if player["x"] + vel + PLAYER_RADIUS + player["score"] <= W:
+                player["x"] = player["x"] + vel
+
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
+            if player["y"] - vel - PLAYER_RADIUS - player["score"] >= 0:
+                player["y"] = player["y"] - vel
+
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+            if player["y"] + vel + PLAYER_RADIUS + player["score"] <= H:
+                player["y"] = player["y"] + vel
+
+        data = "move" + str(player["x"]) + " " + str(player["y"])
 
 
 
