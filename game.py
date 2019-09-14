@@ -136,6 +136,26 @@ def main(name):
                 player["y"] = player["y"] + vel
 
         data = "move" + str(player["x"]) + " " + str(player["y"])
+        # send data to server and recieve back all players information
+        balls, players, game_time = server.send(data)
+
+        for event in pygame.event.get():
+            #if user gits red x button close window
+            if event.type == pygame.QUIT:
+                run = False
+
+            if event.type == pygame.KEYDOWN:
+                #if user hits a escape key close program
+                if event.type == pygame.K_ESCAPE:
+                    run = False
+
+        # redraw window then update the frame
+        redraw_window(players, balls, game_time, player["score"])
+        pygame.display.update()
+
+    server.disconnect()
+    pygame.quit()
+    quit()
 
 
 
