@@ -161,6 +161,14 @@ def main(name):
 
 
 if __name__ == '__main__':
+    # get users name
+    while True:
+        name = input("Please enter yout name: ")
+        if 0 < len(name) < 20:
+            break
+        else:
+            print("Error, this is not allowed (must be between 1 and 19 characters [inclusive])")
+
     #make window start in top left hand corner
     os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (0,30)
 
@@ -170,6 +178,4 @@ if __name__ == '__main__':
     print('Starting game')
 
     pygame.display.flip()
-
-    while True:
-        pass
+    main(name)

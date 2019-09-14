@@ -200,4 +200,34 @@ def threaded_client(conn, _id):
         try:
             #Recieve data from client
             data = conn.recv(32)
-            
+
+            if not data:
+                break
+
+            data = data.decode("utf-8")
+            #print("[DATA] Recieved", data, "from client id:", current_id)
+            # look for specific commands from recieved data
+
+            if data.split(" ")[0] == "move":
+                split_data = data.split(" ")
+                x = int(split_data[1])
+                y = int(split_data[2])
+                players[current_id]["x"] = x
+                players[current_id]["y"] = y
+
+                #only check for collision if the game has started
+                if start:
+                    check_collision(players, balls)
+                    player_collision(players)
+                # if the amount of balls is less than 150 create more
+
+                if len(balls) < 150:
+                    create_balls(balls, random.randrange(100,150))
+                    print("[GAME] Generating more orbs")
+
+                send_data = pickle.dumps((balls, players, game_time))
+
+            elif data.split(" ")[0] == "id":
+                send_data = str.encode(str(current_id))
+
+
