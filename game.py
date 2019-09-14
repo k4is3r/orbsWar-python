@@ -107,6 +107,26 @@ def main(name):
 
     run = True
 
+    while run:
+        clock.tick(30)# 30 fps max
+        player = player[current_id]
+        vel = START_VEL - round(player["score"]/14)
+        if vel <= 1:
+            vel = 1
+
+        #get key presss
+        keys = pygame.key.get_pressed()
+
+        data = ""
+        # movement based on key presses
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+            if player["x"] - vel - PLAYER_RADIUS - player["score"] >= 0:
+                player["x"] = player["x"] + vel
+        
+
+
+
+
 
 if __name__ == '__main__':
     #make window start in top left hand corner
